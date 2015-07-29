@@ -6,6 +6,7 @@ def lev(w1, w2):
 		return len(w1)
 	return min(lev(w1[1:], w2[1:])+(w1[0] != w2[0]), lev(w1[1:], w2)+1, lev(w1, w2[1:])+1)
 
+	
 def leven(w1, w2, errMax):
 	#w2 smaller pls:
 	if len(w1) < len(w2):
@@ -38,3 +39,23 @@ def leven(w1, w2, errMax):
 
 def main():
 	pass
+	
+
+def index():
+	#create a list of lists: [[cat, 1, 6, 100], mat[2, 105, 238]] that acts as an index.
+	#will be alphabetical to help with searches.
+
+def readFile():
+	#makes the line by line list [ maybe better to index/read @ same time]
+	
+
+def search(w1, maxDiff):
+	#Returns a list of the words that match the upper bound. 
+	#
+ 
+ 
+def writeStats():
+	#adds data point to file of word, errMax, number of levenshtein matches.
+	#open file
+	#write stats
+	#close file
