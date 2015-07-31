@@ -54,8 +54,11 @@ def search(w1, maxDiff):
 	#
  
  
-def writeStats():
-	#adds data point to file of word, errMax, number of levenshtein matches.
-	#open file
-	#write stats
-	#close file
+def writeStats(word, maxDiff, numMatches):
+	#adds data point to end of file of word, errMax, number of levenshtein matches.
+	statsFile=open("searchRecord.txt", 'a') 
+	statsFile.write("{0},{1},{2}".format(word, maxDiff, numMatches)
+	statsFile.close()
+	return
+	
+	
