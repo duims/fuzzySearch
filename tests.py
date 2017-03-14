@@ -1,24 +1,27 @@
-import unittest
-import fuzzySearch
+from hypothesis import given
+from hypothesis.strategies import text, integers
+from fuzzySearch import lev
 
 
-class TestFuzzySearch(unittest.TestCase):
+@given(text(), text(max_size=10))
+def test_add_levenshtein(s, modifier):
+    v = generate_string(s, mod2=modifier)
+    assert(lev(s, v) == len(modifier))
 
 
-	def test_leven(self):
-		self.assertFalse(fuzzySearch.leven("c", "abcdefghi",1 ))
-		self.assertTrue(fuzzySearch.leven("cat", "cat", 0))
-		self.assertTrue(fuzzySearch.leven("cat", "cran", 2))
-		self.assertFalse(fuzzySearch.leven("kitten", "sitting",2))
-	
-	def test_lev(self):
-		self.assertNotEqual(fuzzySearch.lev("abcdefghi","c"), 1)
-		self.assertEqual(fuzzySearch.lev("cat", "cat"), 0)
-		self.assertEqual(fuzzySearch.lev("cat", "cran"), 2)
-		self.assertNotEqual(fuzzySearch.lev("kitten", "sitting"),2)
+@given(text(), text(), text())
+def test_delete_levenshtein(s, u, v):
+    long_str = generate_string(mod1=s, mod2=u, mod3=v)
+    short_str = generate_string(mod1=s, mod3=v)
+    assert(lev(long_str, short_str) == len(u))
 
 
+@given(text(), text(), text(), text())
+def test_substitute_levenshtein(s, u, v, w):
+    left = generate_string(mod1=s, mod2=u, mod3=v)
+    right = generate_string(mod1=s, mod2=w, mod3=v)
+    assert(lev(left, right) == lev(u, w))
 
-if __name__=='__main__':
-        unittest.main()
 
+def generate_string(mod1='', mod2='', mod3=''):
+    return mod1 + mod2 + mod3
