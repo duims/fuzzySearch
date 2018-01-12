@@ -1,5 +1,4 @@
 import json
-import itertools
 
 
 def lev(w1, w2):
@@ -110,5 +109,6 @@ def write_stats(word, maxDiff, numMatches):
     with open("searchRecord.txt", "w1") as statsFile:
         statsFile.write("{0},{1},{2}".format(word, maxDiff, numMatches))
     return
+
 
 main()
